@@ -1,9 +1,10 @@
 class GuessingGame
   #make a guess
   #track guesses
-  def initialize(answer=nil)
-   @answer = answer || (0..100).to_a.sample
-   @guesses = 5
+  def initialize(difficulty = 100, answer=nil)
+    @difficulty = difficulty
+   @answer = answer || (0..difficulty).to_a.sample
+   @guesses = difficulty.fdiv(10).round
    @won= false
   end
 
