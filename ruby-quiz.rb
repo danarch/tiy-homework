@@ -1,5 +1,5 @@
 Questions = [
-  {question: "What is the capital of the GA?",
+  {question: "What is the capital of GA?",
     choices: ["Atlanta","Helen", "Savannah", "Canton"],
     answer: 1
   },
