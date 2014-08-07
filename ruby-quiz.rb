@@ -1,4 +1,4 @@
-Questions = [
+Questions = [ Question.new
   {question: "What is the capital of GA?",
     choices: ["Atlanta","Helen", "Savannah", "Canton"],
     answer: 1
@@ -17,6 +17,16 @@ Questions = [
   }
 ]
 
+class Question
+  attr_reader :question, :choices, :answer
+  def initialize question, choices, answer
+    @question = question
+    @choices = []
+    @answer = 0
+  end
+end
+
+
 class Quiz
   def initialize
     @score = 0
@@ -24,15 +34,15 @@ class Quiz
   end
 
   def askquest(quest, num)
-    puts quest[:question]
+    puts quest.question
     i = 1
-    quest[:choices].each do |choice|
+    quest.choices.each do |choice|
       puts "#{i}. #{choice}"
       i+= 1
     end
     userans = gets.chomp.to_i
-    @answers[num] = [userans, quest[:choices][:answer]]
-    if userans == quest[:answer] + 1
+    @answers[num] = [userans, quest.choices[quest.answer]]
+    if userans == quest.answer + 1
       puts "That's correct!"
       @score += 1
     else
