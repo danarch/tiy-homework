@@ -1,0 +1,123 @@
+class Card
+  attr_reader :rank, :suit
+  include Comparable
+  Ranks = [2,3,4,5,6,7,8,9,10, :J, :Q, :K, :A]
+  Suits = %w{Spades Diamonds Clubs Hearts}
+  def initialize rank, suit
+    @rank = rank
+    @suit = suit
+  end
+  def value
+    case rank
+    when :A
+      14
+    when :K
+      13
+    when :Q
+      12
+    when :J
+      11
+    else rank
+  def <=>(other)
+    if self.value == other.value
+      case suit
+      when "Spades"
+        if other.suit == "Spades"
+          0
+        else
+          1
+        end
+      when "Diamonds"
+        if other.suit == "Spades"
+          -1
+        elsif other.suit == "Diamonds"
+          0
+        else
+          1
+        end
+      when "Clubs"
+        if other.suit == "Spades" || "Diamonds"
+          -1
+        elsif other.suit == "Clubs"
+          0
+        else
+          1
+        end
+      when "Hearts"
+        if other.suit == "Hearts"
+          0
+        else
+          -1
+        end
+      end
+    else
+      self.value <=> other.value
+    end
+end
+
+class Deck
+  include Enumerable
+  def initialize num = 1
+    @cardsleft = []
+    @cardsdrwn = []
+    num.times do
+      Ranks.product(Suits).each do |rank, suit|
+        @cardsleft << Card.new(rank, suit)
+      end
+    end
+  end
+  def each
+    @cardsleft.each {|card| yield card}
+  end
+  def shuffle!
+    @cardsleft += @cardsdrwn
+    @cardsdrwn = []
+    @cardsleft.shuffle!
+  end
+  def draw
+    card = @crdsleft.shift
+    @crdsdrwn << card
+    card
+  end
+end
+
+class Hand
+  include Enumerable
+  def initialize
+    @cards = []
+  end
+  def add cards
+    @cards << card
+  end
+  def each
+    @cards.each {|card| yield card}
+  def value
+    sum = 0
+    @cards.sort_by {|card| card.value}.each do |card|
+      if card.rank != :A
+        sum += card.value
+      else
+        if sum > 11
+          sum += 1
+        else
+          sum += 11
+        end
+      end
+  end
+  def bust?
+    self.value > 21
+  end
+  def split
+    if @cards.size == 2 and @cards[0].rank == @cards[1].rank
+      split = @cards.pop
+      Hand.new.add(split)
+    end
+  end
+  def blackjack?
+    if @cards.size == 2 && value == 21
+      true
+    else
+      false
+    end
+  end
+end

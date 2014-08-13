@@ -1,0 +1,24 @@
+%html
+  %head
+    %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", :rel=>"stylesheet"}
+
+    %body
+      %p= "Params is #{params}"
+
+      .container
+        %table.table
+          %thead
+            / tr = table row
+            %tr
+              / th = table header
+              / td = table cell
+              %th *
+              - @min.upto(@max) do |num|
+                %th= num
+              / don't need end in HAML
+          %tbody
+          - @min.upto(@max) do |num|
+            %tr
+              %th= num
+              - @min.upto(@max) do |other_num|
+                %td= num * other_num

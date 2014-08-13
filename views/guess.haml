@@ -1,0 +1,9 @@
+%html
+  %head
+    %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", :rel=>"stylesheet"}
+  %body
+    .container
+      %h1= "welcome to the guessing game.."
+
+      %form{:method => "POST"}
+        %input{:name => "text", :placeholder => "make a guess here"}

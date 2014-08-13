@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title Hangman
+    %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", :rel=>"stylesheet"}
+  %body
+    .container
+      %h1= "Hangman"
+        %p= "#{game.board}"
+
+      %form{:method => "POST"}
+      .form-group
+        %input{:letter => "a", :placeholder => "what letter  do you want to guess?"}

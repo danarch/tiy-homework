@@ -1,0 +1,8 @@
+%html
+  %body
+    %link{:href=>"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css", :rel=>"stylesheet"}
+
+      %h1= "You typed: #{@text}"
+
+      %form{:method => "POST"}
+        %input{:name => "text", :placeholder => "your text here"}
